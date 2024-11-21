@@ -6,7 +6,7 @@ from freegames import floor, vector
 state = {'score': 0}
 path = Turtle(visible=False)
 writer = Turtle(visible=False)
-aim = vector(5, 0)
+aim = vector(5, 0) #hello you losser ass cunt bitch weirdos
 pacman = vector(-40, -80)
 ghosts = [
     [vector(-180, 160), vector(5, 0)],
