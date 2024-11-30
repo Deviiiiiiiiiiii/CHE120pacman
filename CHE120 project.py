@@ -170,9 +170,18 @@ def move():
             course.x = plan.x
             course.y = plan.y
 
+        # up()
+        # goto(point.x + 10, point.y + 10)
+        # dot(20, '#9B1B30') #KT: changed the colour to match the cutsy garden theme
+#KT: i muted this part im trying to chnage the shape of the main charatcer but im having toruble making sure the code removed there its already been. leave this commented out part here in case we have to settle for the dot in the end.
         up()
-        goto(point.x + 10, point.y + 10)
-        dot(20, '#9B1B30') #KT: changed the colour to match the cutsy garden theme
+        goto(pacman.x, pacman.y)  # Move to Pac-Man's position
+        path.color('#9B1B30')  #KT: changed the colour of the character from yellow to pink
+        for _ in range(5):  # Draw a star
+            path.forward(20)
+            path.right(144)
+        path.end_fill()
+
 
     update()
 
