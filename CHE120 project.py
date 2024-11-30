@@ -172,7 +172,7 @@ def move():
 
         up()
         goto(point.x + 10, point.y + 10)
-        dot(20, '#8B0000') #KT: changed the colour to match the cutsy garden theme
+        dot(20, '#9B1B30') #KT: changed the colour to match the cutsy garden theme
 
     update()
 
