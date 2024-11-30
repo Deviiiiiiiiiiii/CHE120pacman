@@ -80,8 +80,8 @@ def valid(point):
 
 def world():
     """Draw world using path."""
-    bgcolor('#98FB98') #KT: more matching theme to cute garden
-    path.color('#FFB6C1') #KT: more matching theme to cute garden
+    bgcolor('#B0E57C') #KT: more matching theme to cute garden
+    path.color('#FF77A9') #KT: more matching theme to cute garden
 
     for index in range(len(tiles)):
         tile = tiles[index]
