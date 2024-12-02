@@ -1,19 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Dec  1 23:05:20 2024
-
-@author: devishitalwar
-"""
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Dec  1 22:48:34 2024
-
-@author: devishitalwar
-"""
-
 from random import choice
 from turtle import *
 
@@ -40,24 +24,24 @@ ghosts = [
 # fmt: off
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 4, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+    0, 1, 1, 4, 1, 1, 1, 1, 0, 10, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 0, 0, 0,
     0, 1, 3, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+    0, 1, 0, 0, 1, 0, 12, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     9, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 4, 1, 1, 1, 8,
     0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 5, 1, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-    0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0,
+    0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 13, 0, 0, 0, 0,
     0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 4, 0, 1, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ]
 # fmt: on
@@ -138,6 +122,16 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(20, 'white')
                 path.dot(17, 'black')
+                
+            elif tile == 12:
+                path.up()
+                path.goto(x + 10, y + 10)
+                path.dot(20, 'black')
+                
+            elif tile == 13:
+                path.up()
+                path.goto(x + 10, y + 10)
+                path.dot(20, 'white')
 
 def move():
     """Move pacman and all ghosts."""
@@ -228,7 +222,7 @@ def move():
         square(x, y)#second player
 
         
-    if current_tile_second_player in (8, 9) and prev_tile_second_player not in (8, 9):
+    if current_tile_second_player in (8, 9, 10, 11, 12) and prev_tile_second_player not in (8, 9, 10, 11):
         index_second_player = offset(pacman_second_player)
         portal_second_player()
     
@@ -277,6 +271,7 @@ def move():
         
     for point, course in ghosts: #second player
         if abs(pacman_second_player - point) < 20: #second player
+            game_over()
             return None #second player
 
     if state['score'] <= 50:
@@ -301,6 +296,7 @@ def change_second_player(x, y): #second player
 
 
 def portal():
+    """ Transports the first pacman from one point to another"""
     index = offset(pacman)
     if tiles[index] == 8:
         for i in range(len(tiles)):
@@ -328,7 +324,7 @@ def portal():
                 pacman.x = x
                 pacman.y =y
                 return
-            
+     
     elif tiles[index] == 11:
         for i in range(len(tiles)):
             if tiles[i] == 10:
@@ -338,7 +334,18 @@ def portal():
                 pacman.y =y
                 return
             
+    elif tiles[index] == 12:
+         for i in range(len(tiles)):
+             if tiles[i] == 13:
+                 x = (i % 20) * 20 -200
+                 y = 180 - (i // 20) * 20
+                 pacman.x = x
+                 pacman.y =y
+                 return
+
+            
 def portal_second_player():
+    """ Transports the second pacman from one point to another"""
     index_second_player = offset(pacman_second_player)
     if tiles[index_second_player] == 8:
         for i in range(len(tiles)):
@@ -375,52 +382,35 @@ def portal_second_player():
                 pacman_second_player.x = x
                 pacman_second_player.y =y
                 return
+            
+    elif tiles[index_second_player] == 12:
+         for i in range(len(tiles)):
+             if tiles[i] == 13:
+                 x = (i % 20) * 20 -200
+                 y = 180 - (i // 20) * 20
+                 pacman_second_player.x = x
+                 pacman_second_player.y =y
+                 return
 
 def game_over():
+    """"Checks how the game ended, and prints the appropriate response """
     for point, course in ghosts:
         if 1 not in tiles:
-            print('Congrats! You won')
-        elif abs(pacman - point) < 20:
-            print('Too bad! You lost')
-    print('Press r to play again and e to end the session.')
+            print('Congrats! You won :)')
+        elif abs(pacman - point) < 20 or abs(pacman_second_player - point) < 20:
+            print('Too bad! You lost :(')
+    print('Press r for instructions to play again or e for how to end the session.')
 
 def play_again():
-    state = {'score': 0}
-    path = Turtle(visible=False)
-    writer = Turtle(visible=False)
-    aim = vector(5, 0) 
-    pacman = vector(-40, -80)
-    ghosts = [
-        [vector(-180, 160), vector(5, 0)],
-        [vector(-180, -160), vector(0, 5)],
-        [vector(100, 160), vector(0, -5)],
-        [vector(100, -160), vector(-5, 0)],
-        [vector(0, -40), vector(-5, 5)],
-          ]
-    # fmt: off
-    tiles = [
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 1, 1, 4, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-        0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0,
-        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-        0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 0, 0, 0,
-        0, 1, 3, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
-        0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-        0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-        9, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-        0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 4, 1, 1, 1, 8,
-        0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
-        0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 5, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-        0, 1, 0, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-        0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0,
-        0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 4, 0, 1, 0, 0, 0, 0, 0,
-        0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
-        0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ]
-    # fmt: on
+    """Gives instructions on playing again and closes the graphics window for a smooth transition."""
+    print('Click on the code and run it again!')
+    bye()
+    
+def end_session():
+    """Gives instructions on how to exit the game without issues."""
+    print('Close the graphics window and console')
+    done()
+    bye()
 
 setup(420, 420, 370, 0)
 hideturtle()
