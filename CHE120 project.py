@@ -189,7 +189,7 @@ def move():
         y = 180 - (index // 20) * 20
         square(x, y)
         
-    if current_tile in (8, 9) and prev_tile not in (8, 9):
+    if current_tile in (8, 9, 10, 11, 12) and prev_tile not in (8, 9, 10, 11, 12):
             index = offset(pacman)
             portal()
             
@@ -428,7 +428,7 @@ onkey(lambda: change_second_player(-5, 0), 'a') #second player
 onkey(lambda: change_second_player(0, 5), 'w') #second player
 onkey(lambda: change_second_player(0, -5), 's') #second player
 onkey(lambda: play_again(), 'r')
-onkey(lambda: done(), 'e')
+onkey(lambda: end_session(), 'e')
 world()
 move()
 done()
