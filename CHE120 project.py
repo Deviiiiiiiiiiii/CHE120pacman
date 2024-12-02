@@ -316,7 +316,7 @@ def portal():
                 pacman.y =y
                 return
             
-    elif tiles[index] == 10:
+    if tiles[index] == 10:
         for i in range(len(tiles)):
             if tiles[i] == 11:
                 x = (i % 20) * 20 -200
@@ -334,7 +334,7 @@ def portal():
                 pacman.y =y
                 return
             
-    elif tiles[index] == 12:
+    if tiles[index] == 12:
          for i in range(len(tiles)):
              if tiles[i] == 13:
                  x = (i % 20) * 20 -200
@@ -365,7 +365,7 @@ def portal_second_player():
                 pacman_second_player.y =y
                 return
             
-    elif tiles[index_second_player] == 10:
+    if tiles[index_second_player] == 10:
         for i in range(len(tiles)):
             if tiles[i] == 11:
                 x = (i % 20) * 20 -200
@@ -383,7 +383,7 @@ def portal_second_player():
                 pacman_second_player.y =y
                 return
             
-    elif tiles[index_second_player] == 12:
+    if tiles[index_second_player] == 12:
          for i in range(len(tiles)):
              if tiles[i] == 13:
                  x = (i % 20) * 20 -200
