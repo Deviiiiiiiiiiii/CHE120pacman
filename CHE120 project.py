@@ -113,7 +113,7 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(20, 'orange')
                 
-            elif tile == 8 or tile == 9:
+            if current_tile in (8, 9, 10, 11) and prev_tile not in (8, 9, 10, 11):
                 path.up()
                 path.goto(x + 10, y + 10)
                 path.dot(20, 'white')
@@ -222,6 +222,44 @@ def change(x, y):
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
+
+def portal():
+    index = offset(pacman)
+    if tiles[index] == 8:
+        for i in range(len(tiles)):
+            if tiles[i] == 9:
+                x = (i % 20) * 20 -200
+                y = 180 - (i // 20) * 20
+                pacman.x = x
+                pacman.y =y
+                return
+            
+    elif tiles[index] == 9:
+        for i in range(len(tiles)):
+            if tiles[i] == 8:
+                x = (i % 20) * 20 -200
+                y = 180 - (i // 20) * 20
+                pacman.x = x
+                pacman.y =y
+                return
+            
+    elif tiles[index] == 10:
+        for i in range(len(tiles)):
+            if tiles[i] == 11:
+                x = (i % 20) * 20 -200
+                y = 180 - (i // 20) * 20
+                pacman.x = x
+                pacman.y =y
+                return
+            
+    elif tiles[index] == 11:
+        for i in range(len(tiles)):
+            if tiles[i] == 10:
+                x = (i % 20) * 20 -200
+                y = 180 - (i // 20) * 20
+                pacman.x = x
+                pacman.y =y
+                return
 
 def game_over():
     for point, course in ghosts:
