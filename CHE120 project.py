@@ -113,7 +113,7 @@ def world():
                 path.goto(x + 10, y + 10)
                 path.dot(20, 'orange')
                 
-            if current_tile in (8, 9, 10, 11) and prev_tile not in (8, 9, 10, 11):
+            elif tile == 8 or tile == 9 or tile == 10 or tile == 11:
                 path.up()
                 path.goto(x + 10, y + 10)
                 path.dot(20, 'white')
