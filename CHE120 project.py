@@ -48,7 +48,7 @@ def square(x, y):
     path.up()
     path.goto(x, y)
     path.down()
-    path.begin_fill()
+    #path.begin_fill()
 
     for count in range(4):
         path.forward(20)
@@ -188,9 +188,9 @@ def move():
             course.x = plan.x
             course.y = plan.y
 
-        #up()
-        #goto(point.x + 10, point.y + 10)
-        #dot(20, '#9B1B30') #KT: changed the colour to match the cutsy garden theme
+        up()
+        goto(point.x + 10, point.y + 10)
+        dot(20, '#9B1B30') #KT: changed the colour to match the cutsy garden theme
 #KT: i muted this part im trying to chnage the shape of the main charatcer but im having toruble making sure the code removed there its already been. leave this commented out part here in case we have to settle for the dot in the end.
         up()
         goto(pacman.x, pacman.y)  #KT: to move our character arcoss the x and y asis
