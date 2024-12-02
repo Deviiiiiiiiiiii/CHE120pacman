@@ -205,7 +205,8 @@ def move():
 
     for point, course in ghosts:
         if abs(pacman - point) < 20:
-            return #game_over()
+            game_over()
+            return None
 
     if state['score'] <= 50:
         ontimer(move, 150)
@@ -222,59 +223,50 @@ def change(x, y):
         aim.x = x
         aim.y = y
 
-#Any function connected to replaying the game (game_over(), restart(), play_again())is very buggy at the moment so they're commented out
-#def game_over():
-    #for point, course in ghosts:
-        #if 1 not in tiles:
-            #print('Congrats! You won')
-            #play_again()
-        #elif abs(pacman - point) < 20:
-            #print('Too bad! You lost')
-            #play_again()
-        #else:
-            #pass
+def game_over():
+    for point, course in ghosts:
+        if 1 not in tiles:
+            print('Congrats! You won')
+        elif abs(pacman - point) < 20:
+            print('Too bad! You lost')
+    print('Press r to play again and e to end the session.')
 
-#def play_again():
- #   writer.goto(160, 180)
-  #  writer.color('white')
-   # writer.write(prompt['Press r to play again and e to end the session.'])
-    
-    
-#def restart():
- #   state = {'score': 0}
-  #  path = Turtle(visible=False)
-   # writer = Turtle(visible=False)
-    #aim = vector(5, 0) 
-    #pacman = vector(-40, -80)
-    #ghosts = [
-   #     [vector(-180, 160), vector(5, 0)],
-    #    [vector(-180, -160), vector(0, 5)],
-     #   [vector(100, 160), vector(0, -5)],
-      #  [vector(100, -160), vector(-5, 0)],
-       # [vector(0, -40), vector(-5, 5)],
-        #  ]
-#    # fmt: off
-    #tiles = [
-     #  0, 1, 1, 4, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-     #   0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0,
-    #  0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-     #   0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 0, 0, 0,
-     #   0, 1, 3, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
-     #   0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-     #   0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-     #   9, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-     #   0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 4, 1, 1, 1, 8,
-     #   0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
-     #   0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 5, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-     #   0, 1, 0, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-     #   0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0,
-     #   0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 4, 0, 1, 0, 0, 0, 0, 0,
-     #   0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
-     #   0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-     #   0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0, 0, 0, 0,
-     #   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-     #   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    #]
+def play_again():
+    state = {'score': 0}
+    path = Turtle(visible=False)
+    writer = Turtle(visible=False)
+    aim = vector(5, 0) 
+    pacman = vector(-40, -80)
+    ghosts = [
+        [vector(-180, 160), vector(5, 0)],
+        [vector(-180, -160), vector(0, 5)],
+        [vector(100, 160), vector(0, -5)],
+        [vector(100, -160), vector(-5, 0)],
+        [vector(0, -40), vector(-5, 5)],
+          ]
+    # fmt: off
+    tiles = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 1, 4, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 0, 0, 0,
+        0, 1, 3, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+        9, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 4, 1, 1, 1, 8,
+        0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 5, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 1, 0, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+        0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0,
+        0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 4, 0, 1, 0, 0, 0, 0, 0,
+        0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ]
     # fmt: on
 
 setup(420, 420, 370, 0)
@@ -288,6 +280,8 @@ onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
+onkey(lambda: play_again(), 'r')
+onkey(lambda: done(), 'e')
 world()
 move()
 done()
