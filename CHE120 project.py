@@ -1,3 +1,19 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Dec  1 23:05:20 2024
+
+@author: devishitalwar
+"""
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Dec  1 22:48:34 2024
+
+@author: devishitalwar
+"""
+
 from random import choice
 from turtle import *
 
@@ -7,9 +23,13 @@ prev_tile = 0
 
 state = {'score': 0}
 path = Turtle(visible=False)
+path_second_player = Turtle(visible=False) #second player
 writer = Turtle(visible=False)
+writer_second_player = Turtle(visible=False)#second player
 aim = vector(5, 0) 
+aim_second_player = vector(5, 0) #second player
 pacman = vector(-40, -80)
+pacman_second_player = vector(-20, -80) #second player
 ghosts = [
     [vector(-180, 160), vector(5, 0)],
     [vector(-180, -160), vector(0, 5)],
@@ -127,15 +147,25 @@ def move():
     clear()
 
     global prev_tile
+    global prev_tile_second_player
 
     prev_index = offset(pacman)
     prev_tile = tiles[prev_index]
+    
+    prev_index_second_player = offset(pacman_second_player)
+    prev_tile_second_player = tiles[prev_index_second_player]
 
     if valid(pacman + aim):
         pacman.move(aim)
+        
+    if valid(pacman_second_player + aim_second_player): #second player
+        pacman_second_player.move(aim_second_player) #second player
+        
 
     index = offset(pacman)
+    index_second_player = offset(pacman_second_player) #second player
     current_tile = tiles[index]
+    current_tile_second_player = tiles[index_second_player]
 
     if tiles[index] == 1:
         tiles[index] = 2
@@ -159,19 +189,56 @@ def move():
         square(x, y)
         
     if tiles[index] == 5:
-        tiles[index] = 2
+        tiles[index] = 2 
         state['score'] += 50
         x = (index % 20) * 20 - 200
         y = 180 - (index // 20) * 20
         square(x, y)
-
+        
     if current_tile in (8, 9) and prev_tile not in (8, 9):
-        index = offset(pacman)
-        portal()
+            index = offset(pacman)
+            portal()
+            
+    if tiles[index_second_player] == 1:#second player
+        tiles[index_second_player] = 2#second player
+        state['score'] += 1#second player
+        x = (index_second_player % 20) * 20 - 200#second player
+        y = 180 - (index_second_player // 20) * 20#second player
+        square(x, y)#second player
+
+    if tiles[index_second_player] == 3:#second player
+        tiles[index_second_player] = 2#second player
+        state['score'] += 5#second player
+        x = (index_second_player % 20) * 20 - 200#second player
+        y = 180 - (index_second_player // 20) * 20#second player
+        square(x, y)#second player
+
+    if tiles[index_second_player] == 4:#second player
+        tiles[index_second_player] = 2#second player
+        state['score'] += 10#second player
+        x = (index_second_player % 20) * 20 - 200#second player
+        y = 180 - (index_second_player // 20) * 20#second player
+        square(x, y)#second player
+        
+    if tiles[index_second_player] == 5:#second player
+        tiles[index_second_player] = 2#second player
+        state['score'] += 50#second player
+        x = (index_second_player % 20) * 20 - 200#second player
+        y = 180 - (index_second_player // 20) * 20#second player
+        square(x, y)#second player
+
+        
+    if current_tile_second_player in (8, 9) and prev_tile_second_player not in (8, 9):
+        index_second_player = offset(pacman_second_player)
+        portal_second_player()
     
     up()
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
+    
+    up() #second player
+    goto(pacman_second_player.x + 10, pacman_second_player.y + 10) #second player
+    dot(20, 'blue') #second player
 
     for point, course in ghosts:
         if valid(point + course):
@@ -207,6 +274,10 @@ def move():
         if abs(pacman - point) < 20:
             game_over()
             return None
+        
+    for point, course in ghosts: #second player
+        if abs(pacman_second_player - point) < 20: #second player
+            return None #second player
 
     if state['score'] <= 50:
         ontimer(move, 150)
@@ -222,6 +293,12 @@ def change(x, y):
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
+        
+def change_second_player(x, y): #second player
+    if valid(pacman_second_player + vector(x, y)): #second player
+        aim_second_player.x = x #second player
+        aim_second_player.y = y #second player
+
 
 def portal():
     index = offset(pacman)
@@ -259,6 +336,44 @@ def portal():
                 y = 180 - (i // 20) * 20
                 pacman.x = x
                 pacman.y =y
+                return
+            
+def portal_second_player():
+    index_second_player = offset(pacman_second_player)
+    if tiles[index_second_player] == 8:
+        for i in range(len(tiles)):
+            if tiles[i] == 9:
+                x = (i % 20) * 20 -200
+                y = 180 - (i // 20) * 20
+                pacman_second_player.x = x
+                pacman_second_player.y =y
+                return
+            
+    elif tiles[index_second_player] == 9:
+        for i in range(len(tiles)):
+            if tiles[i] == 8:
+                x = (i % 20) * 20 -200
+                y = 180 - (i // 20) * 20
+                pacman_second_player.x = x
+                pacman_second_player.y =y
+                return
+            
+    elif tiles[index_second_player] == 10:
+        for i in range(len(tiles)):
+            if tiles[i] == 11:
+                x = (i % 20) * 20 -200
+                y = 180 - (i // 20) * 20
+                pacman_second_player.x = x
+                pacman_second_player.y =y
+                return
+            
+    elif tiles[index_second_player] == 11:
+        for i in range(len(tiles)):
+            if tiles[i] == 10:
+                x = (i % 20) * 20 -200
+                y = 180 - (i // 20) * 20
+                pacman_second_player.x = x
+                pacman_second_player.y =y
                 return
 
 def game_over():
@@ -318,6 +433,10 @@ onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
+onkey(lambda: change_second_player(10, 0), 'd') #second player
+onkey(lambda: change_second_player(-10, 0), 'a') #second player
+onkey(lambda: change_second_player(0, 10), 'w') #second player
+onkey(lambda: change_second_player(0, -10), 's') #second player
 onkey(lambda: play_again(), 'r')
 onkey(lambda: done(), 'e')
 world()
