@@ -135,6 +135,9 @@ def world():
 
 def move():
     """Move pacman and all ghosts."""
+    if 1 not in tiles and 3 not in tiles and 4 not in tiles and 5 not in tiles:
+        game_over()
+        return None
     writer.undo()
     writer.write(state['score'])
 
